@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const pool = new Pool({
   host: 'localhost',
   user: 'postgres',
-  password: '',
+  password: 'admin',
   database: 'likeme',
   allowExitOnIdle: true
 });
@@ -17,7 +17,7 @@ async function addPost(titulo, img, descripcion) {
   const consulta = "INSERT INTO posts (titulo, img, descripcion, likes) VALUES ($1, $2, $3, 0) RETURNING *";
   const values = [titulo, img, descripcion];
   const result = await pool.query(consulta, values);
-  return result.rows[0]; // Devuelve el post insertado
+  return result.rows[0];
 }
 
 async function updateLikes(likes, id) {
